@@ -1,0 +1,20 @@
+version: '3'
+services:
+  frontend:
+    build: ./
+  nginx:
+      restart: unless-stopped
+      image: staticfloat/nginx-certbot
+      ports:
+          - 80:80/tcp
+          - 443:443/tcp
+      environment:
+          CERTBOT_EMAIL: yourmail@mail.com
+      volumes:
+        - ./conf.d:/etc/nginx/user.conf.d:ro
+        - letsencrypt:/etc/letsencrypt
+      depends_on:
+        - frontend
+
+volumes:
+  letsencrypt:
