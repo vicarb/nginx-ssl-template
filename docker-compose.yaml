@@ -1,6 +1,7 @@
 version: '3'
 services:
   frontend:
+    #front end data and other services
     build: ./
   nginx:
       restart: unless-stopped
